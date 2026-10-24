@@ -8,14 +8,39 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Job Portal API is running",
+// Authentication routes
+app.use("/api/auth", require("./routes/authRoutes"));
+
+// Unknown route handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
+});
+
+// Central error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+
+  if (err.name === "ValidationError") {
+    return res.status(400).json({
+      success: false,
+      message: err.message,
+    });
+  }
+
+  res.status(500).json({
+    success: false,
+    message: "Internal server error",
   });
 });
 
 const startServer = async () => {
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is missing from .env");
+  }
+
   await connectDB();
 
   const PORT = process.env.PORT || 5000;
@@ -25,4 +50,7 @@ const startServer = async () => {
   });
 };
 
-startServer();
+startServer().catch((error) => {
+  console.error("Server startup failed:", error.message);
+  process.exit(1);
+});
