@@ -14,6 +14,9 @@ app.use("/api/auth", require("./routes/authRoutes"));
 //job routes
 app.use("/api/jobs", require("./routes/jobRoutes"));
 
+//application routes
+app.use("/api/applications", require("./routes/applicationRoutes"));
+
 // Unknown route handler
 app.use((req, res) => {
   res.status(404).json({
