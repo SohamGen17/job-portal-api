@@ -21,13 +21,19 @@ const {
   getJobApplications,
 } = require("../controllers/applicationController");
 
+const validate = require("../middleware/validate");
+const { jobRules } = require("../middleware/validationRules");
+
 
 router.post(
-  "/:id/apply",
+  "/",
   protect,
-  authorize("candidate"),
-  applyToJob
+  authorize("employer"),
+  jobRules,
+  validate,
+  createJob
 );
+
 
 router.get(
   "/:id/applications",
