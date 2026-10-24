@@ -1,5 +1,5 @@
 # Job Portal API
-
+## Git repo link : https://github.com/SohamGen17/job-portal-api.git
 A RESTful backend API for a job portal built using **Node.js, Express.js, MongoDB, and Mongoose**. The application allows employers to post and manage jobs, while candidates can search for jobs, apply, and track their applications.
 
 Authentication is handled using JWT, passwords are hashed with bcrypt, and role-based access control protects restricted endpoints.
@@ -79,7 +79,6 @@ git clone YOUR_GITHUB_REPOSITORY_URL
 cd job-portal-api
 ```
 
-Replace `YOUR_GITHUB_REPOSITORY_URL` with your GitHub repository URL.
 
 ### 2. Install dependencies
 
@@ -269,7 +268,7 @@ The collection uses an environment with `baseUrl`, `employerToken`, `candidateTo
 Testing should cover successful operations, validation errors, duplicate applications, closed jobs, invalid status transitions, authentication failures, role restrictions, and ownership violations.
 
 **Published Postman documentation:**  
-[Add your published Postman documentation URL here.]
+https://documenter.getpostman.com/view/59017632/2sBYHUTfiH
 
 **Exported collection:**  
 The exported collection JSON is stored in the `postman/` directory.

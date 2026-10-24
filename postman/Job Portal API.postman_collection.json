@@ -1,0 +1,1109 @@
+{
+  "info": {
+    "_postman_id": "4f99aa05-cf20-4a87-b250-0d25fe8eb536",
+    "name": "Job Portal API",
+    "description": "## Job Portal API\n\nThis collection contains API tests for a **Job Portal** application, covering the full workflow from user authentication to job management and application tracking.\n\n### Overview\n\nThe Job Portal API is built around three core workflows:\n\n- **Authentication** — Register as a candidate or employer, and log in to receive authentication tokens used across all protected endpoints.\n    \n- **Jobs** — Employers can post new job listings, candidates can browse available jobs, and candidates can apply for positions.\n    \n- **Applications** — Candidates can view their submitted applications, employers can review applications for their job postings, and employers can update application statuses (e.g., accepted or rejected).\n    \n\n### Getting Started\n\n1. **Set up the environment** — The collection uses the `Job-Portal_environment` environment. Ensure `baseUrl` is set to your server address (e.g., `http://localhost:5000`).\n    \n2. **Register & Login** — Run the requests in the **Auth** folder to register users and obtain tokens. The `employerToken` and `candidateToken` environment variables are used to authenticate subsequent requests.\n    \n3. **Run the workflows** — Use the **Jobs** and **Applications** folders to test job posting, applying, and application management.\n    \n\n### Folders\n\n| Folder | Description |\n| --- | --- |\n| **Auth** | User & employer registration, and login |\n| **Jobs** | Add jobs, apply for jobs, and retrieve job listings |\n| **Applications** | View and manage job applications |",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59017632",
+    "_collection_link": "https://go.postman.co/collection/59017632-4f99aa05-cf20-4a87-b250-0d25fe8eb536?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "User registration",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"name\": \"Sidd\",\r\n  \"email\": \"sidd@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"candidate\"\r\n}\r\n  ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "User registration tested successfully"
+          },
+          "response": [
+            {
+              "name": "Register check",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"name\": \"Sidd\",\r\n  \"email\": \"sidd@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"candidate\"\r\n}\r\n  ",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "JSON",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "155",
+                  "type": "text"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"9b-D9+GtS+IkMw1xupDSFXvuuJmTzE\"",
+                  "type": "text"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 11:10:00 GMT",
+                  "type": "text"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive",
+                  "type": "text"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"User registered successfully\",\n    \"data\": {\n        \"id\": \"6adc9208dea51cde8088e692\",\n        \"name\": \"Sidd\",\n        \"email\": \"sidd@mail.com\",\n        \"role\": \"candidate\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Employer registration",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"name\": \"DevTech IT Solutions\",\r\n  \"email\": \"devtecha1234@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"employer\",\r\n  \"companyName\": \"Tech Solutions\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Employer registration tested"
+          },
+          "response": [
+            {
+              "name": "Emp registration",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"name\": \"DevTech IT Solutions\",\r\n  \"email\": \"devtecha1234@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"employer\",\r\n  \"companyName\": \"Tech Solutions\"\r\n}\r\n  ",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "JSON",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "209",
+                  "type": "text"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"d1-iZ5y9jNsL5gu9/fGtolNvy8GH+Q\"",
+                  "type": "text"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 11:12:45 GMT",
+                  "type": "text"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive",
+                  "type": "text"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5",
+                  "type": "text"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"User registered successfully\",\n    \"data\": {\n        \"id\": \"6adc92addea51cde8088e693\",\n        \"name\": \"DevTech IT Solutions\",\n        \"email\": \"devtecha1234@mail.com\",\n        \"role\": \"employer\",\n        \"companyName\": \"Tech Solutions\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {\r",
+                  "  const data = pm.response.json();\r",
+                  "  pm.environment.set(\"employerToken\", data.token);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"devtecha1234@mail.com\",\r\n    \"password\": \"test123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Login operation tested succesfully"
+          },
+          "response": [
+            {
+              "name": "Login 1",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"example2@mail.com\",\r\n    \"password\": \"test123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "355"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"163-XD69M7u238LTg9v9R9gVT6oKgDs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 10:29:27 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZGM4MGRiMWFiZDA3OWY2YWUyNjViYiIsInJvbGUiOiJjYW5kaWRhdGUiLCJpYXQiOjE3OTI4Mzc3NjcsImV4cCI6MTc5MzQ0MjU2N30.q-n6OJHR5PQ_7oahLklGsuNKMQYBzlgEG37wfmbOmNs\",\n    \"data\": {\n        \"id\": \"6adc80db1abd079f6ae265bb\",\n        \"name\": \"Soham\",\n        \"email\": \"example2@mail.com\",\n        \"role\": \"candidate\"\n    }\n}"
+            },
+            {
+              "name": "Login 2",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"sidd@mail.com\",\r\n    \"password\": \"test123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "350"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"15e-kofaa1LWst2xV37bX2aX5iGvgLQ\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 11:36:14 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZGM5MjA4ZGVhNTFjZGU4MDg4ZTY5MiIsInJvbGUiOiJjYW5kaWRhdGUiLCJpYXQiOjE3OTI4NDE3NzQsImV4cCI6MTc5MzQ0NjU3NH0.GQ6uVmlTxBgBKS6pyIlmqq-ay3iIA_-EqWqLScUVU1M\",\n    \"data\": {\n        \"id\": \"6adc9208dea51cde8088e692\",\n        \"name\": \"Sidd\",\n        \"email\": \"sidd@mail.com\",\n        \"role\": \"candidate\"\n    }\n}"
+            },
+            {
+              "name": "EMP login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"devtecha1234@mail.com\",\r\n    \"password\": \"test123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "403"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"193-nP1OHo2880LB0NKzmK3045XsKM0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 11:38:07 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZGM5MmFkZGVhNTFjZGU4MDg4ZTY5MyIsInJvbGUiOiJlbXBsb3llciIsImlhdCI6MTc5Mjg0MTg4NywiZXhwIjoxNzkzNDQ2Njg3fQ.LTs8byRnMH6kOB8RzuZn17t_KEhb7Ud-lW6MuiO80Mk\",\n    \"data\": {\n        \"id\": \"6adc92addea51cde8088e693\",\n        \"name\": \"DevTech IT Solutions\",\n        \"email\": \"devtecha1234@mail.com\",\n        \"role\": \"employer\",\n        \"companyName\": \"Tech Solutions\"\n    }\n}"
+            }
+          ]
+        }
+      ],
+      "description": "This folder contains API tests for the authentication workflow of the Job Portal. It covers user registration for both candidates and employers, as well as the login operation to verify that valid credentials return the expected authentication tokens."
+    },
+    {
+      "name": "Jobs",
+      "item": [
+        {
+          "name": "AddJOB",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {\r",
+                  "  const data = pm.response.json();\r",
+                  "  pm.environment.set(\"jobId\", data.data._id);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0s07}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"title\": \"Junior Backend Developer\",\r\n  \"description\": \"Build REST APIs using Node.js and Express.\",\r\n  \"location\": \"Pune\",\r\n  \"type\": \"full-time\",\r\n  \"salary\": 30000,\r\n  \"skills\": [\"Node.js\", \"Express\", \"MongoDB\"]\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/jobs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "jobs"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "AddJOB",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"title\": \"Junior Backend Developer\",\r\n  \"description\": \"Build REST APIs using Node.js and Express.\",\r\n  \"location\": \"Pune\",\r\n  \"type\": \"full-time\",\r\n  \"salary\": 30000,\r\n  \"skills\": [\"Node.js\", \"Express\", \"MongoDB\"]\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/jobs",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "jobs"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "416"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1a0-gO8lenHSVCA1QZui8Eq90gNLzhw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 11:46:25 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"data\": {\n        \"title\": \"Junior Backend Developer\",\n        \"description\": \"Build REST APIs using Node.js and Express.\",\n        \"companyName\": \"Tech Solutions\",\n        \"location\": \"Pune\",\n        \"type\": \"full-time\",\n        \"salary\": 30000,\n        \"skills\": [\n            \"Node.js\",\n            \"Express\",\n            \"MongoDB\"\n        ],\n        \"status\": \"open\",\n        \"postedBy\": \"6adc92addea51cde8088e693\",\n        \"_id\": \"6adc9a9103c3d7d3b012b00a\",\n        \"createdAt\": \"2026-10-24T11:46:25.571Z\",\n        \"updatedAt\": \"2026-10-24T11:46:25.571Z\",\n        \"__v\": 0\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "ApplyJOB",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {\r",
+                  "  const data = pm.response.json();\r",
+                  "  pm.environment.set(\"applicationId\", data.data._id);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0s1u}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"coverLetter\": \"I am interested in this role and have experience with Node.js and MongoDB.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/jobs/6adc9a9103c3d7d3b012b00a/apply",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "jobs",
+                "6adc9a9103c3d7d3b012b00a",
+                "apply"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "ApplyJOB",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"coverLetter\": \"I am interested in this role and have experience with Node.js and MongoDB.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/jobs/6adc9a9103c3d7d3b012b00a/apply",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "jobs",
+                    "6adc9a9103c3d7d3b012b00a",
+                    "apply"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "326"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"146-p013U66xWhElIXJJ5vq4k2Poha8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 11:58:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"data\": {\n        \"job\": \"6adc9a9103c3d7d3b012b00a\",\n        \"candidate\": \"6adc80db1abd079f6ae265bb\",\n        \"coverLetter\": \"I am interested in this role and have experience with Node.js and MongoDB.\",\n        \"status\": \"applied\",\n        \"_id\": \"6adc9d732d4499a5c236fd02\",\n        \"createdAt\": \"2026-10-24T11:58:43.619Z\",\n        \"updatedAt\": \"2026-10-24T11:58:43.619Z\",\n        \"__v\": 0\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get JOBS",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"name\": \"DevTech IT Solutions\",\r\n  \"email\": \"devtecha1234@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"employer\",\r\n  \"companyName\": \"Tech Solutions\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/jobs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "jobs"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get JOBS",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"name\": \"DevTech IT Solutions\",\r\n  \"email\": \"devtecha1234@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"employer\",\r\n  \"companyName\": \"Tech Solutions\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/jobs",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "jobs"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "457"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1c9-9UG/HUZJeiln5iY/BDmc0s45hQo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 12:10:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"total\": 1,\n    \"page\": 1,\n    \"pages\": 1,\n    \"count\": 1,\n    \"data\": [\n        {\n            \"_id\": \"6adc9a9103c3d7d3b012b00a\",\n            \"title\": \"Junior Backend Developer\",\n            \"description\": \"Build REST APIs using Node.js and Express.\",\n            \"companyName\": \"Tech Solutions\",\n            \"location\": \"Pune\",\n            \"type\": \"full-time\",\n            \"salary\": 30000,\n            \"skills\": [\n                \"Node.js\",\n                \"Express\",\n                \"MongoDB\"\n            ],\n            \"status\": \"open\",\n            \"postedBy\": \"6adc92addea51cde8088e693\",\n            \"createdAt\": \"2026-10-24T11:46:25.571Z\",\n            \"updatedAt\": \"2026-10-24T11:46:25.571Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ],
+      "description": "The Jobs folder contains tests conducted for the \"add job\" and \"apply for job\" operation."
+    },
+    {
+      "name": "Applications",
+      "item": [
+        {
+          "name": "Get Application as candidate",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0s1u}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"name\": \"DevTech IT Solutions\",\r\n  \"email\": \"devtecha1234@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"employer\",\r\n  \"companyName\": \"Tech Solutions\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/applications/my",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "applications",
+                "my"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Application as candidate",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"name\": \"DevTech IT Solutions\",\r\n  \"email\": \"devtecha1234@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"employer\",\r\n  \"companyName\": \"Tech Solutions\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/applications/my",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "applications",
+                    "my"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "704"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2c0-eZH9Ir7W/dYsVS3XxhGZOBg5UvE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 12:14:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"count\": 1,\n    \"data\": [\n        {\n            \"_id\": \"6adc9d732d4499a5c236fd02\",\n            \"job\": {\n                \"_id\": \"6adc9a9103c3d7d3b012b00a\",\n                \"title\": \"Junior Backend Developer\",\n                \"description\": \"Build REST APIs using Node.js and Express.\",\n                \"companyName\": \"Tech Solutions\",\n                \"location\": \"Pune\",\n                \"type\": \"full-time\",\n                \"salary\": 30000,\n                \"skills\": [\n                    \"Node.js\",\n                    \"Express\",\n                    \"MongoDB\"\n                ],\n                \"status\": \"open\",\n                \"postedBy\": \"6adc92addea51cde8088e693\",\n                \"createdAt\": \"2026-10-24T11:46:25.571Z\",\n                \"updatedAt\": \"2026-10-24T11:46:25.571Z\",\n                \"__v\": 0\n            },\n            \"candidate\": \"6adc80db1abd079f6ae265bb\",\n            \"coverLetter\": \"I am interested in this role and have experience with Node.js and MongoDB.\",\n            \"status\": \"applied\",\n            \"createdAt\": \"2026-10-24T11:58:43.619Z\",\n            \"updatedAt\": \"2026-10-24T11:58:43.619Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get application as Employer",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0s07}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"name\": \"DevTech IT Solutions\",\r\n  \"email\": \"devtecha1234@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"employer\",\r\n  \"companyName\": \"Tech Solutions\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/jobs/6adc9a9103c3d7d3b012b00a/applications",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "jobs",
+                "6adc9a9103c3d7d3b012b00a",
+                "applications"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get application as Employer",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"name\": \"DevTech IT Solutions\",\r\n  \"email\": \"devtecha1234@mail.com\",\r\n  \"password\": \"test123\",\r\n  \"role\": \"employer\",\r\n  \"companyName\": \"Tech Solutions\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/jobs/6adc9a9103c3d7d3b012b00a/applications",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "jobs",
+                    "6adc9a9103c3d7d3b012b00a",
+                    "applications"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "389"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"185-UrvPIQmG3AgXOgDsoq3ICzR8hT8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 12:17:53 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"count\": 1,\n    \"data\": [\n        {\n            \"_id\": \"6adc9d732d4499a5c236fd02\",\n            \"job\": \"6adc9a9103c3d7d3b012b00a\",\n            \"candidate\": {\n                \"_id\": \"6adc80db1abd079f6ae265bb\",\n                \"name\": \"Soham\",\n                \"email\": \"example2@mail.com\"\n            },\n            \"coverLetter\": \"I am interested in this role and have experience with Node.js and MongoDB.\",\n            \"status\": \"applied\",\n            \"createdAt\": \"2026-10-24T11:58:43.619Z\",\n            \"updatedAt\": \"2026-10-24T11:58:43.619Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "update application status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{json_web_token_0s07}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"shortlisted\"\r\n}\r\n  ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/applications/6adc9d732d4499a5c236fd02/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "applications",
+                "6adc9d732d4499a5c236fd02",
+                "status"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "update application status",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"shortlisted\"\r\n}\r\n  ",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:5000/api/applications/6adc9d732d4499a5c236fd02/status",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "applications",
+                    "6adc9d732d4499a5c236fd02",
+                    "status"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "696"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2b8-bfqUUSe1/xysrV2YSwkBuF3I0Es\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Oct 2026 12:43:24 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"6adc9d732d4499a5c236fd02\",\n        \"job\": {\n            \"_id\": \"6adc9a9103c3d7d3b012b00a\",\n            \"title\": \"Junior Backend Developer\",\n            \"description\": \"Build REST APIs using Node.js and Express.\",\n            \"companyName\": \"Tech Solutions\",\n            \"location\": \"Pune\",\n            \"type\": \"full-time\",\n            \"salary\": 30000,\n            \"skills\": [\n                \"Node.js\",\n                \"Express\",\n                \"MongoDB\"\n            ],\n            \"status\": \"open\",\n            \"postedBy\": \"6adc92addea51cde8088e693\",\n            \"createdAt\": \"2026-10-24T11:46:25.571Z\",\n            \"updatedAt\": \"2026-10-24T11:46:25.571Z\",\n            \"__v\": 0\n        },\n        \"candidate\": \"6adc80db1abd079f6ae265bb\",\n        \"coverLetter\": \"I am interested in this role and have experience with Node.js and MongoDB.\",\n        \"status\": \"shortlisted\",\n        \"createdAt\": \"2026-10-24T11:58:43.619Z\",\n        \"updatedAt\": \"2026-10-24T12:43:23.992Z\",\n        \"__v\": 0\n    }\n}"
+            }
+          ]
+        }
+      ],
+      "description": "This folder contains API tests for application management workflows. It covers retrieving submitted applications from a candidate's perspective, fetching all applications for a specific job posting from an employer's perspective, and updating the status of an application (e.g., accepted or rejected) by the employer."
+    }
+  ]
+}
